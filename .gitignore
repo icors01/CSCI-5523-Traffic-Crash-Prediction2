@@ -6,6 +6,12 @@ __pycache__/
 # C extensions
 *.so
 
+# Data - data files are too large for GitHub
+data/raw/*
+!data/raw/sample_crash_data.csv
+!data/raw/README.md
+data/processed/*
+
 # Distribution / packaging
 .Python
 build/
