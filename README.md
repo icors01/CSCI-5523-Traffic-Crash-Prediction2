@@ -28,16 +28,28 @@ Baseline: Kernel Density Estimation (KDE).
 Supervised: logistic regression, gradient boosting (LightGBM/XGBoost).
 Poisson process to calculate the probability of a rare-event occurring within a fixed interval of time or space, given a known average rate of occurrence.
 
-## Milestones:
+## Milestones/Tasks:
 
-Use a grid generator to create the city grid cells and assign team roles for the project. 
-Evaluate, transform, and load crash/collision dataset for pre-processing
-Assign labels 1 for >= 1 crash, 0 otherwise for classification and model training
-Identify and select the best features and the parameters for the model
+✓ Create grid generation function to assign a grid of cells to an area - Adam Meyers
+
+✓ Create function to transform crash dataset to sort by cells and date - Adam Meyers
+
+✓ Create function to assign labels 1 for >= 1 crash tomorrow in same cell, 0 otherwise - Adam Meyers
+
+Identify and select the best features to include in the model (may require additional data beyond crash data i.e. weather data, traffic data, etc)
+
+Identify the best parameters for the model
+
 Train the model
+
+Create evaluation plan
+
 Evaluate the model
+
 Create tables and figures to present our findings
+
 Make recommendations e.g. allocating more resources or targeting cells with higher predicted risk, revamping the road design, etc.
+
 Create a final report summarizing everything
 
 ## Evaluation Plan:
