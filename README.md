@@ -36,21 +36,32 @@ Poisson process to calculate the probability of a rare-event occurring within a 
 
 ✓ Create function to assign labels 1 for >= 1 crash tomorrow in same cell, 0 otherwise - Adam Meyers
 
+Additional preprocessing
+    - Adding weather data - Ian Corsiga
+    - Cleaning up outliers - Adam Meyers
+    - Reducing the overall area - Adam Meyers
+
+Calculate the probability of a crash happening tomorrow - Rehan Ahmad
+
+Create the first model - Rehan Ahmad
+
+Create the second model - Jeffrey Qian
+
 Identify and select the best features to include in the model (may require additional data beyond crash data i.e. weather data, traffic data, etc)
 
-Identify the best parameters for the model
+Identify the best parameters for the model - Clayton Sparrow
 
 Train the model
 
-Create evaluation plan
+Create evaluation plan - Clayton Sparrow
 
-Evaluate the model
+Evaluate the model - Clayton Sparrow
 
-Create tables and figures to present our findings
+Create tables and figures to present our findings - Adam Meyers
 
 Make recommendations e.g. allocating more resources or targeting cells with higher predicted risk, revamping the road design, etc.
 
-Create a final report summarizing everything
+Create a final report summarizing everything - Everyone
 
 ## Evaluation Plan:
 
