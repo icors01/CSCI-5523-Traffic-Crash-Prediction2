@@ -16,3 +16,22 @@ Once the data finishes exporting, click the green bar again, and download the fi
 
 Rename the file to "all_crashes.csv" and place it in the /data/raw folder
 
+
+# How to download weather data
+
+Go to [National Centers for Environmental Information](https://www.ncei.noaa.gov/cdo-web/search?datasetid=GHCND)
+
+Select Weather Observation Type as Daily Summaries, Date Range as 2016-01-01 to 2025-09-30, Search for Stations, 
+
+For search term, add these three stations to cart 
+- INTERNATIONAL FALLS INTERNATIONAL AIRPORT, MN US 
+- MINNEAPOLIS ST. PAUL INTERNATIONAL AIRPORT, MN US
+- ROCHESTER INTERNATIONAL AIRPORT, MN US
+
+Select Daily CSV Output in Cart, make sure date range is correct, and continue
+
+Select Station Name, Make Units Standard, Select Data Types 'Precipiation', 'Air Temperature', and 'Weather Type'
+
+Enter email address and NOAA will send the data file to your email
+
+Download file as "weather_data.csv" and add to /data/raw folder
