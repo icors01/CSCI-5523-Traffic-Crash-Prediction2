@@ -16,7 +16,7 @@ def generate_grid(gdf, cell_size_m=5000, crs="EPSG:5070"):
         gdf = gdf.set_crs("EPSG:4326")
 
     # Get gdf in metric crs
-    gdf_m = gdf.to_crs(crs);
+    gdf_m = gdf.to_crs(crs)
 
     # Set minimum and maximum bounds
     minx, miny, maxx, maxy = gdf_m.total_bounds
@@ -48,6 +48,30 @@ def generate_grid(gdf, cell_size_m=5000, crs="EPSG:5070"):
     grid = grid_m.to_crs("EPSG:4326")
     
     return grid
+
+def reduce_gdf_area(gdf, min_lat, max_lat, min_long, max_long):
+    """
+    gdf: GeoDataFrame in EPSG:4326 (lat/lon)
+    min_lat: minimum latitude bounds
+    max_lat: maximum latitude bounds
+    min_long: minimum longitude bounds
+    max_long: maximum longitude bounds
+    returns: GeoDataFrame only containing points within the bounds
+    """
+    return gdf[(gdf.geometry.y >= min_lat) & (gdf.geometry.y <= max_lat) & (gdf.geometry.x >= min_long) & (gdf.geometry.x <= max_long)]
+
+def generate_grid_tc_metro_area(gdf, cell_size_m=500):
+    """
+    gdf: GeoDataFrame in EPSG:4326 (lat/lon)
+    cell_size_m: grid cell size in meters
+    returns: GeoDataFrame of grid cells in EPSG:4326, bounded around the Twin Cities metro area
+    """
+
+    # Remove all points outside the Twin Cities metro area (rough approximation of metro area as a rectangle and not including Wisconsin portions)
+    gdf = reduce_gdf_area(gdf, 44.545707, 45.681479, -94.390340, -92.759918)
+
+    # Call generate_grid with adjusted GDF
+    return generate_grid(gdf, cell_size_m)
 
 def create_cell_day_df(crash_gdf, grid_gdf, start_date, end_date):
     """

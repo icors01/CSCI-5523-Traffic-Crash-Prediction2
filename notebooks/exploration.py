@@ -40,12 +40,12 @@ df.head()
 
 # %%
 from shapely import wkt
-from src.preprocessing import generate_grid
+from src.preprocessing import generate_grid_tc_metro_area
 
 df['geometry'] = df['geom'].apply(wkt.loads)
 gdf = gpd.GeoDataFrame(df, geometry='geometry', crs='EPSG:4326')
 
-grid = generate_grid(gdf)
+grid = generate_grid_tc_metro_area(gdf)
 grid.head()
 
 
