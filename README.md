@@ -37,7 +37,7 @@ Poisson process to calculate the probability of a rare-event occurring within a 
 ✓ Create function to assign labels 1 for >= 1 crash tomorrow in same cell, 0 otherwise - Adam Meyers
 
 Additional preprocessing
-    - Adding weather data - Ian Corsiga
+    - Adding weather data + EDA for weather data - Ian Corsiga
     - Cleaning up outliers - Adam Meyers
     - Reducing the overall area - Adam Meyers
 
