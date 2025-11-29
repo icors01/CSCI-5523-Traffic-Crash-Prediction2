@@ -121,4 +121,4 @@ for each training sample `i` (a `(t, c)` pair).
 
 The loss is minimized by `LogisticHotspot` is:
 
-$$ \mathcal{L}(w, b) = \frac{1}{n}\sum_{i=1}^{n}w_i^{(s)}[-y_ilog\hat{p_i}-(1-y_i)log(1-\hat{p_i})] + \frac{\lambda}{2}||w||_2^2$$
+$$ \mathcal{L}(w, b) = \frac{1}{n}\sum_{i=1}^{n}w_i^{(s)}[-y_ilog\hat{p_i}-(1-y_i)log(1-\hat{p_i})] + \frac{\lambda}{2}\lvert w \rvert_2^2$$
