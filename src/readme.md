@@ -113,7 +113,12 @@ We use a logistic regression model to map features to probability:
 
 $$z_i = x_i^Tw + b,$$
 
-$@\hat{p_i} = \Sigma(z_i) = \frac{1}{1 + e^{-z_i}}$$
+$$\hat{p_i} = \Sigma(z_i) = \frac{1}{1 + e^{-z_i}}$$
 
 for each training sample `i` (a `(t, c)` pair). 
 
+#### 4.3.1 Loss function with L2 class weights
+
+The loss is minimized by `LogisticHotspot` is:
+
+$$ \mathcal{L}$$
