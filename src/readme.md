@@ -13,9 +13,9 @@ We need,
 
 1. a daily counts matrix  
    $Y \in \mathbb{N}^{T \times C}$ where  
-   - \(T\) = number of days  
-   - \(C\) = number of grid cells  
-   - \(Y[t, c]\) = # of crashes in cell `c` on day `t`.
+   - T = number of days  
+   - C = number of grid cells  
+   - $Y{t, c}$ = # of crashes in cell `c` on day `t`.
 
 then,
 
