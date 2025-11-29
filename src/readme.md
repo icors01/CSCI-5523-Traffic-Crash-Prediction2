@@ -69,10 +69,19 @@ $$
   - older events contribute less.
 - Different $\(\tau\)$ values capture short, medium, and long memory.
 
-### 3.3 Implementation
+## 4. Implementation
 
 ```python
 from model import compute_hawkes_features
 
 S_dict = compute_hawkes_features(Y, taus=(3, 7, 30))
+```
+
+### 4.1 Building the training data \( X, y \)
+
+We want to predict for each cell–day pair: "Will there be at least one crash tomorrow?"
+
+For each day $t = 0, 1, \dots, T-2$ and cell c:
+- `Label`:
+  $$y_{t,c} = 1\{Y[t+1,c} \geq 1\}$$
 
