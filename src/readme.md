@@ -122,3 +122,16 @@ for each training sample `i` (a `(t, c)` pair).
 The loss is minimized by `LogisticHotspot` is:
 
 $$ \mathcal{L}(w, b) = \frac{1}{n}\sum_{i=1}^{n}w_i^{(s)}[-y_ilog\hat{p_i}-(1-y_i)log(1-\hat{p_i})] + \frac{\lambda}{2}\lVert w \rVert_2^2$$
+
+- $w_i^{(s)}$ are sample weights: postives get larger weight to handle class imbalance
+- $\lambda$ is the L2 regularization strength (`l2` in `LogisticConfig`).
+
+The gradients are:
+
+$$\tau_i = (\hat{p_i}-y_i)w_i^{(s)},$$
+
+$$\nabla = \frac{1}{n}\sum_i r_ix_i + \lambda w,$$
+
+$$\nabla_b = \frac{1}{n}\sum_ir_i$$
+
+The model uses simple gradient descent to update w and b.
