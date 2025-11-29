@@ -63,7 +63,7 @@ s^{(\tau)}_{t,c} = \rho \, s^{(\tau)}_{t-1,c} + Y[t-1, c],
 \quad \rho = e^{-1/\tau}, \quad s^{(\tau)}_{0,c} = 0
 $$
 
-- $s^{(τ)}[t, c]$ summarizes **all past crashes** in that cell, with an exponential decay:
+- $s^{(τ)}_[t, c]$ summarizes **all past crashes** in that cell, with an exponential decay:
   - recent days have more weight,
   - older events contribute less.
 - Different $\(\tau\)$ values capture **short, medium, and long memory**.
