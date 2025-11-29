@@ -1,27 +1,28 @@
 # `model.py`: Poisson/Hawkes Temporal Features + L2 Logistic Regression
 
-This module implements **two things**:
+This module implements two things:
 
-1. **Poisson/Hawkes-inspired temporal features** for cell–day crash counts  
-2. An **L2-regularized logistic regression model** for predicting  
-   > “Will this cell have **at least one crash tomorrow**?”
+1. Poisson/Hawkes-inspired temporal features for cell–day crash counts  
+2. An L2-regularized logistic regression model for predicting: “Will this cell have at least one crash tomorrow?”
 
 ---
 
 ## 1. How it works
 
-From this module’s perspective, you only need:
+We need,
 
-1. A daily counts matrix  
+1. a daily counts matrix  
    \( Y \in \mathbb{N}^{T \times C} \) where  
    - \(T\) = number of days  
    - \(C\) = number of grid cells  
    - \(Y[t, c]\) = # of crashes in cell `c` on day `t`.
 
-2. The model then does:
-   - Compute **Poisson/Hawkes-style temporal features** from `Y`.
-   - Build a training set `(X, y)` where each row corresponds to a `(day t, cell c)` pair.
-   - Train an **L2-regularized logistic regression** that outputs  
+then,
+
+2. the model:
+   - Computes Poisson/Hawkes-style temporal features from `Y`.
+   - Builds a training set `(X, y)` where each row corresponds to a `(day t, cell c)` pair.
+   - Trains a L2-regularized logistic regression that outputs  
      $$\(\hat p_{t,c} = \Pr(\text{crash in cell } c \text{ on day } t+1)\).$$
 
 ---
@@ -44,15 +45,15 @@ From this module’s perspective, you only need:
 
 ---
 
-## 3. Poisson/Hawkes temporal features (logic)
+## 3. Why use Poisson/Hawkes temporal features?
 
 ### 3.1 Intuition
 
-Crashes are often **self-exciting**:
+Crashes are often self-exciting:
 - A crash in a cell increases the chance of another crash in the near future (e.g., due to persistent risk factors).
 - This extra risk decays over time.
 
-This is the intuition behind a **Hawkes process**. We approximate that behaviour using **exponential-decay features**.
+This is the intuition behind a Hawkes process. We approximate that behaviour using exponential-decay features.
 
 ### 3.2 Discrete-time decayed counts
 
@@ -63,10 +64,10 @@ s^{(\tau)}_{t,c} = \rho \, s^{(\tau)}_{t-1,c} + Y[t-1, c],
 \quad \rho = e^{-1/\tau}, \quad s^{(\tau)}_{0,c} = 0
 $$
 
-- $s^{(τ)}_{t, c}$ summarizes **all past crashes** in that cell, with an exponential decay:
+- $s^{(τ)}_{t, c}$ summarizes all past crashes in that cell, with an exponential decay:
   - recent days have more weight,
   - older events contribute less.
-- Different $\(\tau\)$ values capture **short, medium, and long memory**.
+- Different $\(\tau\)$ values capture short, medium, and long memory.
 
 ### 3.3 Implementation
 
