@@ -41,9 +41,9 @@ Additional preprocessing
     - Cleaning up outliers - Adam Meyers
     - Reducing the overall area - Adam Meyers
 
-Calculate the probability of a crash happening tomorrow - Rehan Ahmad
+✓ Calculate the probability of a crash happening tomorrow - Rehan Ahmad
 
-Create the first model - Rehan Ahmad
+✓ Create the first model - Rehan Ahmad
 
 Create the second model - Jeffrey Qian
 
