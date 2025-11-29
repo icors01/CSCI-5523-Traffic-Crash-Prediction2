@@ -86,4 +86,4 @@ For each day $t = 0, 1, \dots, T-2$ and cell c:
   $$y_{t,c} = 1\{Y[t+1,c] \geq 1\}$$
 
 - `Features`:
-- $$x_{t,c} = \left( s_{t,c}^{\tau_1}, s_{t,c}^{\tau_2}, \dots \right)$$
+  $$x_{t,c} = \left( s_{t,c}^{\tau_1}, s_{t,c}^{\tau_2}, \dots \right)$$
