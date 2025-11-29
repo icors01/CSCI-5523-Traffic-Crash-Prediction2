@@ -83,5 +83,5 @@ We want to predict for each cell–day pair: "Will there be at least one crash t
 
 For each day $t = 0, 1, \dots, T-2$ and cell c:
 - `Label`:
-  $$y_{t,c} = 1\{Y[t+1,c} \geq 1\}$$
+  $$y_{t,c} = 1\{Y[t+1,c] \geq 1\}$$
 
