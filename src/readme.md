@@ -8,7 +8,7 @@ This module implements **two things**:
 
 ---
 
-## 1. High-level workflow
+## 1. How it works
 
 From this module’s perspective, you only need:
 
@@ -22,7 +22,7 @@ From this module’s perspective, you only need:
    - Compute **Poisson/Hawkes-style temporal features** from `Y`.
    - Build a training set `(X, y)` where each row corresponds to a `(day t, cell c)` pair.
    - Train an **L2-regularized logistic regression** that outputs  
-     \(\hat p_{t,c} = \Pr(\text{crash in cell } c \text{ on day } t+1)\).
+     $$\(\hat p_{t,c} = \Pr(\text{crash in cell } c \text{ on day } t+1)\).$$
 
 ---
 
