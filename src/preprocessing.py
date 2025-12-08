@@ -162,12 +162,12 @@ def build_master_dataset(start_date, end_feature_date, crash_df, weather_df, gdf
     """
     Build the final master_df with crash + weather features and crash_tomorrow target.
     """
-    # 1. Parse dates & compute target end date 
+    #Parse dates & compute target end date 
     start = pd.Timestamp(start_date)
     feature_end = pd.Timestamp(end_feature_date)
     target_end = feature_end + pd.Timedelta(days=1)
 
-    # Make sure DATE is a proper date column first
+    # Make sure DATE is a proper date column 
     crash_df['DATE'] = pd.to_datetime(crash_df['DATE']).dt.normalize()
 
     max_crash_date = crash_df['DATE'].max()
@@ -182,7 +182,7 @@ def build_master_dataset(start_date, end_feature_date, crash_df, weather_df, gdf
     # Do the same DATE normalization for weather
     weather_df['DATE'] = pd.to_datetime(weather_df['DATE']).dt.normalize()
 
-    # 2. Crash + weather merge on DATE 
+    # Crash + weather merge on DATE 
     print('Merging crash and weather data...')
     master_df = (
         crash_df
@@ -190,15 +190,15 @@ def build_master_dataset(start_date, end_feature_date, crash_df, weather_df, gdf
         .sort_values('DATE')
     )
 
-    # 3. Grid + cell_day_df (target) 
+    # Grid + cell_day_df (target) 
     print('Generating grid...')
-    grid = generate_grid_tc_metro_area(gdf)  # or generate_grid_tc_metro_area(gdf, cell_size_m=500)
+    grid = generate_grid_tc_metro_area(gdf)  
 
     print(f'Generating cell_day_df from {start.date()} to {target_end.date()}...')
     # pass Timestamps directly
     cell_day_df = create_cell_day_df(gdf, grid, start, target_end)
 
-    # 4. Filter by feature window and attach cell_id via spatial join 
+    # Filter by feature window and attach cell_id via spatial join 
     print('Filtering master_df to feature window and attaching cell_id...')
     master_gdf = gpd.GeoDataFrame(master_df, geometry='geometry', crs='EPSG:4326')
 
@@ -208,7 +208,7 @@ def build_master_dataset(start_date, end_feature_date, crash_df, weather_df, gdf
     master_with_cell = gpd.sjoin(master_gdf_filtered, grid, how='left', predicate='within')
     master_with_cell = master_with_cell.drop(columns=['index_right'], errors='ignore')
 
-    # 5. Merge features (X) with target (Y) on cell_id + DATE 
+    # Merge features (X) with target (Y) on cell_id + DATE 
     print('Merging with cell_day_df to attach crash_tomorrow...')
     master_df_final = pd.merge(
         master_with_cell,
