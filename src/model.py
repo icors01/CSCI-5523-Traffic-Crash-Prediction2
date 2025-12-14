@@ -103,11 +103,11 @@ def _compute_class_weights(y, pos_weight):
 @dataclass
 class LogisticConfig:
     lr: float = 0.05           # learning rate
-    epochs: int = 50           # number of gradient steps
-    l2: float = 1e-2           # L2 regularization strength
+    epochs: int = 100          # number of gradient steps
+    l2: float = 1e-3           # L2 regularization strength
     pos_weight: float = None   # positive class weight (for imbalance)
     fit_intercept: bool = True
-    seed: int = 42             # RNG seed for init
+    seed: int = 5523           # RNG seed for init
 
 
 class LogisticHotspot:
