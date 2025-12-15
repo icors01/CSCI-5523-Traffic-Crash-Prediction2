@@ -28,6 +28,7 @@
 
 # %%
 import numpy as np
+import pandas as pd
 
 # Metrics
 from sklearn.metrics import (
@@ -43,15 +44,59 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.pipeline import Pipeline
 
 # Load data
-X_train = np.load("X_train.npy")
-y_train = np.load("y_train.npy")
-X_val   = np.load("X_val.npy")
-y_val   = np.load("y_val.npy")
+# X_train = np.load("X_train.npy")
+# y_train = np.load("y_train.npy")
+# X_val   = np.load("X_val.npy")
+# y_val   = np.load("y_val.npy")
+
+train_df = pd.read_csv("../data/processed/master_training.csv")
+val_df = pd.read_csv("../data/processed/master_testing.csv")
+
+print("Train_df shape:", train_df.shape)
+print("Val_df shape:  ", val_df.shape)
+
+label_col = "crash_tomorrow"
+
+drop_cols = [
+    "geometry",
+    "CountyNameTxt",
+    "Region",
+    "RdwyTypeCde_txtCARTO",
+    "DATE"
+]
+
+categorical_cols = [
+    "WeatherCde_txtCARTO",
+    "SurfaceConditionCde_txtCARTO",
+]
+
+y_train = train_df[label_col].astype(int).values
+y_val = val_df[label_col].astype(int).values
+
+X_train_df = train_df.drop(columns=[label_col])
+X_val_df = val_df.drop(columns=[label_col])
+
+X_train_df = X_train_df.drop(columns=drop_cols, errors="ignore")
+X_val_df = X_val_df.drop(columns=drop_cols, errors="ignore")
+
+X_train_df[["cell_x", "cell_y"]] = X_train_df["cell_id"].str.split("_", expand=True).astype(int)
+X_val_df[["cell_x", "cell_y"]] = X_val_df["cell_id"].str.split("_", expand=True).astype(int)
+
+X_train_df = X_train_df.drop(columns=["cell_id"])
+X_val_df = X_val_df.drop(columns=["cell_id"])
+
+X_train_df = pd.get_dummies(X_train_df, columns=categorical_cols, drop_first=True)
+X_val_df = pd.get_dummies(X_val_df, columns=categorical_cols, drop_first=True)
+
+print(X_train_df.head())
+
+X_train = X_train_df.values.astype(np.float32)
+X_val = X_val_df.values.astype(np.float32)
 
 print("X_train shape:", X_train.shape)
-print("X_val shape:  ", X_val.shape)
+print("X_val shape:", X_val.shape)
 print("Positive rate (train):", y_train.mean())
-print("Positive rate (val):  ", y_val.mean())
+print("Positive rate (val):", y_val.mean())
 
 
 # %%
@@ -84,7 +129,6 @@ ann_pipeline = Pipeline([
         learning_rate_init=1e-3,
         max_iter=30,
         alpha=1e-4,
-        class_weight=class_weight,
         random_state=42
     ))
 ])
@@ -128,3 +172,5 @@ print(f"PR-AUC (avg prec):  {pr_auc:.6f}")
 print(f"ROC-AUC:            {roc_auc:.6f}")
 print(f"Hit-rate@k (k={k}): {hr_k:.6f}")
 
+
+# %%
